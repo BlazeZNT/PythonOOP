@@ -1,43 +1,42 @@
 """Word Finder: finds random words from a dictionary."""
-
 import random
 
-
-
-
 class WordFinder:
-    '''
-    >>> wf = WordFinder("/Users/student/words.txt")
-    3 words read
-
-    >>> wf.random()
-    'cat'
-
-    >>> wf.random()
-    'cat'
-
-    >>> wf.random()
-    'porcupine'
-
-    >>> wf.random()
-    'dog'
-    '''
-    
     def __init__(self,path):
-        file = open(path)
-        self.words = self.parse(file)
-        print(f"{len(self.words)} words read")
+        new = open(path)
+        self.words = self.words_read(new)
+        print(f"There are {len(self.words)} words")
         
-         
-    def parse(self, dict_file):
-        """Parse dict_file -> list of words."""
 
-        return [w.strip() for w in dict_file]
-
+    
+    def words_read(self,new):
+        # for word in self.new:
+        #     self.new_list.append(word)
+        return [i.strip() for i in new]
+    
     def random(self):
-        """Return random word."""
+        return(random.choice(self.words))
+            
+        
+    
+    
+class SpecialWordFinder(WordFinder):
+    def words_read(self,new):
+        return [w.strip() for w in new if w.strip() and not w.startswith('#')]
+            
+            
+    
+    
+        
 
-        return random.choice(self.words)
+# wf = WordFinder("words.txt")
+# print(wf.random())
+# print(wf.random())
+# print(wf.random())
 
-wf = WordFinder("words.txt")
-print(wf.random())
+ws = SpecialWordFinder("complex.txt")
+print(ws.random())
+print(ws.random())
+print(ws.random() in ["pear", "carrot", "kale"])
+print(ws.random() in ["pear", "carrot", "kale"])
+print(ws.random() in ["pear", "carrot", "kale"])
